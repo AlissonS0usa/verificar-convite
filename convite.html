@@ -48,11 +48,30 @@
       font-size: 18px;
       color: #155724; /* Texto verde escuro */
     }
+
+    #img-convite {
+      display: none;
+      max-width:100%;
+      height: auto;
+      margin-top: 20px;   
+      /*width: 100px;*/
+  
+    }
+    .rocket {
+      position: absolute;
+      width: 50px;
+      height: 100px;
+      background-color: black; /* Amarelo */
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+    
   </style>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particlesapp.js"></script>
 </head>
 <body>
 
-  <h1>Confirmação de Presença</h1>
+  <h1>Verificação de Presença</h1>
 
   <label for="phone">Digite os 4 últimos dígitos do seu telefone:</label>
   <input type="text" id="phone" maxlength="4" onkeydown="verificarTecla(event)">
@@ -60,16 +79,24 @@
 
   <p id="mensagem"></p>
 
+  <div id = "img-convite">
+    <img src="imagens/convite.jpeg" alt = "Convite" width="300px">
+  </div>
+
   <script>
     function verificarPresenca() {
       var inputTelefone = document.getElementById('phone').value;
       var convidados = ['9342','8123','3644', '7881', '2003', '1646', '0145', '2438', '9196', '3873', '5947', '3456', '1638', '5666', '6874', '1993', '8649', '8596', '0885', '9256', '8637', '6302', '6399', '5903', '8714', '4877', '4967', '7188', '2888', '6197', '3438', '9492', '8956', '2862'];
 
-      // Simulando uma verificação de convite com os últimos 5 dígitos do telefone
+      // Simulando uma verificação de convite com os últimos 4 dígitos do telefone
       if (convidados.includes(inputTelefone)) {
         document.getElementById('mensagem').innerText = 'Você está convidado para a festa!';
+        exibirFotoConvidado();
+        dispararConfetes();
+        
       } else {
         document.getElementById('mensagem').innerText = 'Desculpe, você não está na lista de convidados.';
+        ocultarFotoConvidado();
       }
     }
 
@@ -79,7 +106,130 @@
         verificarPresenca();
       }
     }
+
+    function exibirFotoConvidado() {
+      document.getElementById('img-convite').style.display = 'block';
+    }
+
+    function ocultarFotoConvidado() {
+      document.getElementById('img-convite').style.display = 'none';
+    }
+
+    function dispararConfetes() {
+      particlesJS('confetes', {
+        particles: {
+          number: {
+            value: 100,
+            density: {
+              enable: true,
+              value_area: 800
+            }
+          },
+          color: {
+            value: '#ffffff'
+          }, 
+          shape: {
+            type: 'circle',
+            stroke: {
+              width: 0,
+              color: '#000000'
+            },
+            polygon: {
+              nb_sides: 5
+            },
+            image: {
+              src: 'imagens/confete.png', // Substitua com o caminho para a imagem de confete
+              width: 100,
+              height: 100
+            }
+          },
+          opacity: {
+            value: 0.5,
+            random: false,
+            anim: {
+              enable: false,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false
+            }
+          },
+          size: {
+            value: 5,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
+              sync: false
+            }
+          },
+          line_linked: {
+            enable: false,
+            distance: 500,
+            color: '#ffffff',
+            opacity: 0.4,
+            width: 2
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: 'bottom',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200
+            }
+          }
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: {
+            onhover: {
+              enable: false,
+              mode: 'grab'
+            },
+            onclick: {
+              enable: false,
+              mode: 'push'
+            },
+            resize: true
+          },
+          modes: {
+            grab: {
+              distance: 400,
+              line_linked: {
+                opacity: 1
+              }
+            },
+            bubble: {
+              distance: 400,
+              size: 40,
+              duration: 2,
+              opacity: 8,
+              speed: 3
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4
+            },
+            push: {
+              particles_nb: 4
+            },
+            remove: {
+              particles_nb: 2
+            }
+          }
+        },
+        retina_detect: true
+      });
+    }
   </script>
+
+  <div id="confetes"></div>
 
 </body>
 </html>
