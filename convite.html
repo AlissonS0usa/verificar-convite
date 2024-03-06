@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmação de Presença</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color: #f8d7da; /* Fundo vermelho claro */
+    }
+
+    h1 {
+      color: #721c24; /* Texto vermelho escuro */
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #721c24; /* Texto vermelho escuro */
+    }
+
+    input {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #dc3545; /* Botão vermelho */
+      color: #fff; /* Texto branco */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c82333; /* Botão vermelho mais escuro no hover */
+    }
+
+    #mensagem {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #155724; /* Texto verde escuro */
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Confirmação de Presença</h1>
+
+  <label for="phone">Digite os 4 últimos dígitos do seu telefone:</label>
+  <input type="text" id="phone" maxlength="4" onkeydown="verificarTecla(event)">
+  <button onclick="verificarPresenca()">Verificar</button>
+
+  <p id="mensagem"></p>
+
+  <script>
+    function verificarPresenca() {
+      var inputTelefone = document.getElementById('phone').value;
+      var convidados = ['9342','8123','3644', '7881', '2003', '1646', '0145', '2438', '9196', '3873', '5947', '3456', '1638', '5666', '6874', '1993', '8649', '8596', '0885', '9256', '8637', '6302', '6399', '5903', '8714', '4877', '4967', '7188', '2888', '6197', '3438', '9492', '8956', '2862'];
+
+      // Simulando uma verificação de convite com os últimos 5 dígitos do telefone
+      if (convidados.includes(inputTelefone)) {
+        document.getElementById('mensagem').innerText = 'Você está convidado para a festa!';
+      } else {
+        document.getElementById('mensagem').innerText = 'Desculpe, você não está na lista de convidados.';
+      }
+    }
+
+    function verificarTecla(event) {
+      // 13 é o código da tecla Enter
+      if (event.keyCode === 13) {
+        verificarPresenca();
+      }
+    }
+  </script>
+
+</body>
+</html>
